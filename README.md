@@ -12,6 +12,31 @@
 
 ---
 
+## 💬 Le projet en quelques mots
+
+> 📦 **Combien de claviers reste-t-il en stock ? Qui a pris la dernière perceuse ? Faut-il recommander du toner ?**
+>
+> Dans beaucoup de petites entreprises, ces questions trouvent encore leur réponse dans un fichier Excel partagé… ou dans la mémoire de quelqu'un. 😅
+>
+> C'est pour répondre à ce besoin que j'ai développé **StockFlow**, une application web de gestion d'inventaire pensée pour les PME : simple à prendre en main, et utile dès le premier jour.
+>
+> 🔹 **Une vue d'ensemble en un coup d'œil** : valeur du stock, articles référencés, derniers mouvements
+> 🔹 **Des alertes automatiques** dès qu'un article passe sous son seuil, avec la quantité à recommander
+> 🔹 **Une traçabilité complète** : chaque entrée et chaque sortie est enregistrée avec son motif
+> 🔹 **Un export Excel en un clic** pour la comptabilité ou l'inventaire annuel
+>
+> 🛠️ Côté technique : Python, Flask et SQLite, avec des tests automatisés pour garantir la fiabilité des calculs de stock.
+>
+> Ce projet m'a appris une chose essentielle : **un bon logiciel part d'un vrai besoin**. Avant d'écrire la moindre ligne de code, il faut comprendre comment les équipes travaillent au quotidien. C'est cette approche que je veux appliquer à chaque outil que je conçois.
+>
+> 🚀 Prochaines étapes : comptes utilisateurs, gestion des fournisseurs et étiquettes QR code.
+>
+> 💡 Et vous, comment gérez-vous le stock dans votre entreprise ? Je serais ravi d'échanger en commentaire !
+>
+> `#Développement` `#Python` `#Flask` `#GestionDeStock` `#PME` `#Logiciel` `#ProjetEtudiant`
+
+---
+
 ## ✨ Fonctionnalités
 
 - **Tableau de bord** : nombre d'articles, unités en stock, valeur totale du stock, articles sous le seuil, valeur par catégorie et derniers mouvements
@@ -38,7 +63,7 @@
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/<mohjir25>/stockflow.git
+git clone https://github.com/mohjir25/stockflow.git
 cd stockflow
 
 # 2. Créer un environnement virtuel
