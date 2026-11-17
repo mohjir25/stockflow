@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Alertes{% endblock %}
+{% block heading %}Alertes de stock{% endblock %}
+
+{% block content %}
+<section class="card">
+  <p class="muted">Articles dont la quantité est inférieure ou égale au seuil d'alerte.</p>
+  <table>
+    <thead><tr><th>Réf.</th><th>Article</th><th>Catégorie</th><th class="num">Stock</th><th class="num">Seuil</th><th class="num">À commander</th><th></th></tr></thead>
+    <tbody>
+    {% for a in alertes %}
+      <tr>
+        <td><code>{{ a.reference }}</code></td>
+        <td><a href="{{ url_for('article_detail', article_id=a.id) }}">{{ a.nom }}</a></td>
+        <td class="muted">{{ a.categorie or '—' }}</td>
+        <td class="num"><span class="pill pill-red">{{ a.quantite }}</span></td>
+        <td class="num">{{ a.seuil_min }}</td>
+        <td class="num"><strong>{{ [a.seuil_min * 2 - a.quantite, 1] | max }}</strong></td>
+        <td class="num"><a class="link" href="{{ url_for('mouvement_nouveau', article=a.id, type='entree') }}">Réapprovisionner</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="7" class="empty">Aucune alerte, tout le stock est au-dessus des seuils 👍</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

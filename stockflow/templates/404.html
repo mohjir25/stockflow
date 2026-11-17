@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Page introuvable{% endblock %}
+{% block heading %}Page introuvable{% endblock %}
+{% block content %}
+<section class="card"><p>Cette page n'existe pas. <a href="{{ url_for('dashboard') }}">Retour au tableau de bord</a></p></section>
+{% endblock %}

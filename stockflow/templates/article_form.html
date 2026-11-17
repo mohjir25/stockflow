@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Modifier' if edition else 'Nouvel' }} article{% endblock %}
+{% block heading %}{{ "Modifier l'article" if edition else 'Nouvel article' }}{% endblock %}
+
+{% block content %}
+<form class="card form" method="post">
+  <div class="form-grid">
+    <label>Référence *
+      <input name="reference" required maxlength="20" value="{{ article.reference if article else '' }}" placeholder="ex. INF-010">
+    </label>
+    <label>Désignation *
+      <input name="nom" required value="{{ article.nom if article else '' }}" placeholder="ex. Écran 27 pouces">
+    </label>
+    <label>Catégorie
+      <select name="categorie_id">
+        <option value="">— Aucune —</option>
+        {% for c in categories %}
+          <option value="{{ c.id }}" {{ 'selected' if article and article.categorie_id|string == c.id|string }}>{{ c.nom }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Emplacement
+      <input name="emplacement" value="{{ article.emplacement if article else '' }}" placeholder="ex. A1-02">
+    </label>
+    <label>Quantité initiale
+      <input type="number" name="quantite" min="0" value="{{ article.quantite if article else 0 }}">
+    </label>
+    <label>Seuil d'alerte
+      <input type="number" name="seuil_min" min="0" value="{{ article.seuil_min if article else 0 }}">
+    </label>
+    <label>Prix unitaire (€)
+      <input type="number" step="0.01" min="0" name="prix_unitaire" value="{{ article.prix_unitaire if article else '0.00' }}">
+    </label>
+  </div>
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="{{ url_for('articles') }}">Annuler</a>
+    <button class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StockFlow{% endblock %} · StockFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}">
+      <span class="logo">▣</span> StockFlow
+    </a>
+    <nav>
+      {% set ep = request.endpoint or '' %}
+      <a href="{{ url_for('dashboard') }}" class="{{ 'active' if ep == 'dashboard' }}">Tableau de bord</a>
+      <a href="{{ url_for('articles') }}" class="{{ 'active' if ep.startswith('article') }}">Articles</a>
+      <a href="{{ url_for('mouvements') }}" class="{{ 'active' if ep.startswith('mouvement') }}">Mouvements</a>
+      <a href="{{ url_for('alertes') }}" class="{{ 'active' if ep == 'alertes' }}">
+        Alertes {% if nb_alertes %}<span class="badge">{{ nb_alertes }}</span>{% endif %}
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <a class="btn btn-ghost" href="{{ url_for('export_excel') }}">⭳ Export Excel</a>
+      <small>v{{ version }}</small>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <h1>{% block heading %}{% endblock %}</h1>
+      <div class="actions">{% block actions %}{% endblock %}</div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+        <div class="flash flash-{{ cat }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

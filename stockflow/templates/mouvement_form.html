@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Nouveau mouvement{% endblock %}
+{% block heading %}Nouveau mouvement{% endblock %}
+
+{% block content %}
+<form class="card form" method="post">
+  <div class="form-grid">
+    <label class="span-2">Article *
+      <select name="article_id" required>
+        <option value="">— Choisir un article —</option>
+        {% for a in articles %}
+          <option value="{{ a.id }}" {{ 'selected' if preselection == a.id }}>{{ a.reference }} — {{ a.nom }} (stock : {{ a.quantite }})</option>
+        {% endfor %}
+      </select>
+    </label>
+    <fieldset class="segmented">
+      <legend>Type *</legend>
+      <label><input type="radio" name="type" value="entree" {{ 'checked' if type_defaut != 'sortie' }}> Entrée</label>
+      <label><input type="radio" name="type" value="sortie" {{ 'checked' if type_defaut == 'sortie' }}> Sortie</label>
+    </fieldset>
+    <label>Quantité *
+      <input type="number" name="quantite" min="1" value="1" required>
+    </label>
+    <label class="span-2">Motif
+      <input name="motif" placeholder="ex. Réception commande fournisseur n° 2026-118">
+    </label>
+  </div>
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="{{ url_for('mouvements') }}">Annuler</a>
+    <button class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Mouvements{% endblock %}
+{% block heading %}Mouvements de stock{% endblock %}
+{% block actions %}<a class="btn btn-primary" href="{{ url_for('mouvement_nouveau') }}">+ Nouveau mouvement</a>{% endblock %}
+
+{% block content %}
+<div class="tabs">
+  <a href="{{ url_for('mouvements') }}" class="{{ 'active' if not type_ }}">Tous</a>
+  <a href="{{ url_for('mouvements', type='entree') }}" class="{{ 'active' if type_ == 'entree' }}">Entrées</a>
+  <a href="{{ url_for('mouvements', type='sortie') }}" class="{{ 'active' if type_ == 'sortie' }}">Sorties</a>
+</div>
+<section class="card">
+  <table>
+    <thead><tr><th>Date</th><th>Type</th><th>Article</th><th class="num">Qté</th><th>Motif</th></tr></thead>
+    <tbody>
+    {% for m in mouvements %}
+      <tr>
+        <td>{{ m.date[:16] }}</td>
+        <td>{% if m.type == 'entree' %}<span class="pill pill-green">Entrée</span>{% else %}<span class="pill pill-orange">Sortie</span>{% endif %}</td>
+        <td><a href="{{ url_for('article_detail', article_id=m.article_id) }}"><code>{{ m.reference }}</code> {{ m.nom }}</a></td>
+        <td class="num">{{ '+' if m.type == 'entree' else '−' }}{{ m.quantite }}</td>
+        <td class="muted">{{ m.motif or '—' }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5" class="empty">Aucun mouvement enregistré.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
